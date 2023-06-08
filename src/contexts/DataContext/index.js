@@ -24,7 +24,7 @@ export const DataProvider = ({ children }) => {
     try {
       const fetchData = await api.loadData();
       setData(fetchData);
-      setLast(fetchData.events.children.last)
+      setLast(fetchData.events[fetchData.events.length-1])
     } catch (err) {
       setError(err);
     }
