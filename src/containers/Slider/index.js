@@ -7,8 +7,8 @@ import "./style.scss";
 const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
-  const byDateDesc = data?.focus.sort((evtA, evtB) =>
-    new Date(evtB.date) - new Date(evtA.date)
+  const byDateDesc = data?.focus.sort((evtB, evtA) =>
+    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
 
   const nextCard = () => {
@@ -19,6 +19,10 @@ const Slider = () => {
         setIndex(0);
       }
     }, 5000);
+  };
+
+  const handleBulletClick = (bulletIndex) => {
+    setIndex(bulletIndex);
   };
 
   useEffect(() => {
@@ -54,6 +58,7 @@ const Slider = () => {
                 type="radio"
                 name="radio-button"
                 checked={index === radioIdx}
+                onChange={() => handleBulletClick(radioIdx)}
               />
             ))}
         </div>
